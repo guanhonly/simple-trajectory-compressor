@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="dc62cae5-cb3d-4621-87c1-ee112b8b7800" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/PointTs.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/TrjCompressor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-    </list>
+    <list default="true" id="dc62cae5-cb3d-4621-87c1-ee112b8b7800" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -73,10 +67,10 @@
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths />
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="357" />
-    <option name="y" value="4" />
-    <option name="width" value="1946" />
+    <option name="y" value="3" />
+    <option name="width" value="1947" />
     <option name="height" value="1083" />
   </component>
   <component name="ProjectView">
@@ -205,12 +199,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1567702013318</updated>
-      <workItem from="1567702017412" duration="1575000" />
+      <workItem from="1567702017412" duration="1636000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1575000" />
+    <option name="totallyTimeSpent" value="1636000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="703" extended-state="7" />

@@ -51,8 +51,8 @@ public class TrjCompressor {
             currV = (Long)currValue;
             prevV = (Long)prevValue;
         } else if (currValue instanceof Double) {
-            currV = py2round((Double)currValue * factor);
-            prevV = py2round((Double)prevValue * factor);
+            currV = (long)((Double)currValue * factor);
+            prevV = (long)((Double)prevValue * factor);
         } else {
             throw new IllegalArgumentException("The type parameters must be long or double!");
         }
@@ -83,10 +83,6 @@ public class TrjCompressor {
             result ^= result;
         }
         return new Tuple(i, result);
-    }
-
-    private long py2round(double num) {
-        return (long)Math.copySign(Math.ceil(Math.abs(num)), num);
     }
 
     private String toASCII(List<Integer> nums) {
