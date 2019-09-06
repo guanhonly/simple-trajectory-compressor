@@ -2,7 +2,7 @@
 A simple implemention of polyline encoding algorithm in java.  
 **The priciple of this algorithm:**  
 Google Maps Platform Doc: [Encoded Polyline Algorithm Format](https://developers.google.com/maps/documentation/utilities/polylinealgorithm).  
-My blog(Simplified Chinese): [轨迹压缩算法(Polyline encoding algorithm)探究](https://guanhonly.github.io/2019/09/05/PolylineEncoding/)
+My blog(简体中文): [轨迹压缩算法(Polyline encoding algorithm)探究](https://guanhonly.github.io/2019/09/05/PolylineEncoding/)
 
 ## Usage
 
