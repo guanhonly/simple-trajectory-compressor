@@ -1,6 +1,10 @@
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author guanhonly
+ * create on 2019-9-6
+ */
 public class TrjCompressor {
     private double factor;
     public TrjCompressor(int precision) {
@@ -8,21 +12,21 @@ public class TrjCompressor {
     }
 
     public String encode(List<PointTs> points) {
-        List<Integer> output = new ArrayList<Integer>();
+        List<Long> output = new ArrayList<Long>();
         PointTs prev = new PointTs(0.0,0.0,0);
         for (int i=0; i<points.size(); i++) {
             if (i > 0) {
                 prev = points.get(i-1);
             }
-            write(output, points.get(i).lat, prev.lat);
-            write(output, points.get(i).lng, prev.lng);
-            write(output, points.get(i).timestamp, prev.timestamp);
+            write(output, points.get(i).getLat(), prev.getLat());
+            write(output, points.get(i).getLng(), prev.getLng());
+            write(output, points.get(i).getTimestamp(), prev.getTimestamp());
         }
         return toASCII(output);
     }
 
     public List<PointTs> decode(String trjCode) {
-        long lat=0, lng=0, latD, lngD, timestamp=0, timestampD;
+        long lat=0, lng=0, timestamp=0, latD, lngD, timestampD;
         List<PointTs> points = new ArrayList<PointTs>();
         for (int i=0; i<trjCode.length();) {
             Tuple tuple = read(trjCode, i);
@@ -40,12 +44,12 @@ public class TrjCompressor {
             lat += latD;
             lng += lngD;
             timestamp += timestampD;
-            PointTs point = new PointTs(lat, lng, timestamp);
+            PointTs point = new PointTs((double)lat / factor, (double) lng / factor, timestamp);
             points.add(point);
         }
         return points;
     }
-    private void write(List<Integer> output, Object currValue, Object prevValue) {
+    private void write(List<Long> output, Object currValue, Object prevValue) {
         long currV, prevV;
         if (currValue instanceof Long) {
             currV = (Long)currValue;
@@ -59,13 +63,13 @@ public class TrjCompressor {
         long offset = currV - prevV;
         offset <<= 1;
         if (offset < 0) {
-            offset ^= offset;
+            offset = ~offset;
         }
         while (offset >= 0x20) {
-            output.add((0x20 | (int)(offset & 0x1f)) + 63);
+            output.add((0x20 | (offset & 0x1f)) + 63);
             offset >>= 5;
         }
-        output.add((int)(offset+63));
+        output.add((offset+63));
     }
 
     private Tuple read(String s, int i) {
@@ -80,15 +84,15 @@ public class TrjCompressor {
         }
         result >>= 1;
         if (comp == 1) {
-            result ^= result;
+            result = ~result;
         }
         return new Tuple(i, result);
     }
 
-    private String toASCII(List<Integer> nums) {
+    private String toASCII(List<Long> nums) {
 
         StringBuilder result = new StringBuilder();
-        for (int i : nums) {
+        for (long i : nums) {
             result.append((char)i);
         }
         return result.toString();

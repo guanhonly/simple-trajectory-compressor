@@ -1,7 +1,11 @@
+/**
+ * @author guanhonly
+ * create on 2019-9-6
+ */
 public class PointTs {
-    double lng;
-    double lat;
-    long timestamp;
+    private double lng;
+    private double lat;
+    private long timestamp;
 
     PointTs(double lat, double lng, long timestamp) {
         this.lng = lng;
@@ -15,7 +19,7 @@ public class PointTs {
     double getLat() {
         return lat;
     }
-    double getTimestamp() {
+    long getTimestamp() {
         return timestamp;
     }
 }
