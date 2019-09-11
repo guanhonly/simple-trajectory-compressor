@@ -55,8 +55,8 @@ public class TrjCompressor {
             currV = (Long)currValue;
             prevV = (Long)prevValue;
         } else if (currValue instanceof Double) {
-            currV = (long)((Double)currValue * factor);
-            prevV = (long)((Double)prevValue * factor);
+            currV = getRound((Double)currValue * factor);
+            prevV = getRound((Double)prevValue * factor);
         } else {
             throw new IllegalArgumentException("The type parameters must be long or double!");
         }
@@ -96,6 +96,10 @@ public class TrjCompressor {
             result.append((char)i);
         }
         return result.toString();
+    }
+
+    private long getRound(double x) {
+        return (long)Math.copySign(Math.round(Math.abs(x)), x);
     }
 }
 

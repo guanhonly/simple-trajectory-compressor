@@ -44,10 +44,9 @@ public class TrjCompressorTest {
         List<PointTs> decoding = trjCompressor.decode(encoding);
 
         for (int i=0; i<trajectory.size(); i++) {
-            // delta is set delta here since the double number multiplication may lose precision.
-            assertEquals(trajectory.get(i).getLat(), decoding.get(i).getLat(), 1e-6);
-            assertEquals(trajectory.get(i).getLng(), decoding.get(i).getLng(), 1e-6);
-            assertEquals(trajectory.get(i).getTimestamp(), decoding.get(i).getTimestamp(), 1e-6);
+            assertEquals(trajectory.get(i).getLat(), decoding.get(i).getLat(), 0);
+            assertEquals(trajectory.get(i).getLng(), decoding.get(i).getLng(), 0);
+            assertEquals(trajectory.get(i).getTimestamp(), decoding.get(i).getTimestamp(), 0);
         }
     }
 }
