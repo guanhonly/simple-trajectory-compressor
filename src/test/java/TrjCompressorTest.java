@@ -56,12 +56,13 @@ public class TrjCompressorTest {
     }
 
     // This ut is to test the compression rate of this
-    // algorithm(compared to json format), which uses
-    // some trajectory data from Microsoft GeoLife.
+    // algorithm(compared to json format), I used some
+    // trajectory data from Microsoft GeoLife:
+    // https://www.microsoft.com/en-us/download/details.aspx?id=52367.
     // Not well written, but correct at least. :P
     @Test
     public void compareWithOtherFormat() throws ParseException {
-        String path = "data/Trajectory";
+        String path = "data/Trajectory"; // one can use another directory which contains the data from GeoLife.
         File directory = new File(path);
         File[] fs = directory.listFiles();
         double avgCompressionRate = 0;
@@ -133,13 +134,13 @@ public class TrjCompressorTest {
         if (size > 0) {
             avgCompressionRate = avgCompressionRate / size;
             if ((size & 1) == 0) {
-                median = (allCompressionRates.get(size/2) + allCompressionRates.get(size/2-1))/2;
+                median = (allCompressionRates.get(size / 2) + allCompressionRates.get(size / 2 - 1)) / 2;
             } else {
-                median = allCompressionRates.get(size/2);
+                median = allCompressionRates.get(size / 2);
             }
         }
 
-        System.out.println("mean of compression rate: " + avgCompressionRate*100 + " %");
-        System.out.println("median of compression rate: " + median*100 + " %");
+        System.out.println("mean of compression rate: " + avgCompressionRate * 100 + " %");
+        System.out.println("median of compression rate: " + median * 100 + " %");
     }
 }

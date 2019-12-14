@@ -31,8 +31,9 @@ List<PointTs> decoding = trjCompressor.decode(trjCode) //type of trjCode is Stri
 ## Performance
 Since it's a compression algorithm, I did a simple experiment to calculate the compression rate(compared to json format).   
 The trajectory data of the experiment is downloaded from [Microsoft GeoLife](https://www.microsoft.com/en-us/download/details.aspx?id=52367)
-and 171 trajectories are used. The code of this experiment is in the file `TrjCompressorTest.java` and the trajectory data
-is in the directory `data/Trajectory`. Here is the result of the experiment:
+and 171 trajectories are used. The code of this experiment is in the file `TrjCompressorTest.java`, you can change the
+value of `path` which contains the trajectory data from GeoLife if you want to do the similar experiment. Here is the 
+result of the experiment:
 ```text
 mean of compression rate: 10.811463326040565 %
 median of compression rate: 10.643147359032803 %
