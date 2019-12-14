@@ -38,4 +38,4 @@ mean of compression rate: 10.811463326040565 %
 median of compression rate: 10.643147359032803 %
 ```
 The mean and median of compression rates is about 10% in this experiment. It can be concluded that, polyline encoding
-algorithm is a good compression algorithm for trajectory data.
+algorithm is an excellent compression algorithm for trajectory data.
