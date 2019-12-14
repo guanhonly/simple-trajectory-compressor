@@ -2,7 +2,7 @@
  * @author guanhonly
  * create on 2019-9-6
  */
-public class PointTs {
+public class PointTs implements Comparable<PointTs> {
     private double lng;
     private double lat;
     private long timestamp;
@@ -13,13 +13,19 @@ public class PointTs {
         this.timestamp = timestamp;
     }
 
-    double getLng() {
+    public int compareTo(PointTs p) {
+        return (int) (timestamp - p.timestamp);
+    }
+
+    public double getLng() {
         return lng;
     }
-    double getLat() {
+
+    public double getLat() {
         return lat;
     }
-    long getTimestamp() {
+
+    public long getTimestamp() {
         return timestamp;
     }
 }

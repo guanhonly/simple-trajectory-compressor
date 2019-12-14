@@ -7,16 +7,17 @@ import java.util.List;
  */
 public class TrjCompressor {
     private double factor;
+
     public TrjCompressor(int precision) {
         factor = Math.pow(10, precision);
     }
 
     public String encode(List<PointTs> points) {
         List<Long> output = new ArrayList<Long>();
-        PointTs prev = new PointTs(0.0,0.0,0);
-        for (int i=0; i<points.size(); i++) {
+        PointTs prev = new PointTs(0.0, 0.0, 0);
+        for (int i = 0; i < points.size(); i++) {
             if (i > 0) {
-                prev = points.get(i-1);
+                prev = points.get(i - 1);
             }
             write(output, points.get(i).getLat(), prev.getLat());
             write(output, points.get(i).getLng(), prev.getLng());
@@ -26,9 +27,9 @@ public class TrjCompressor {
     }
 
     public List<PointTs> decode(String trjCode) {
-        long lat=0, lng=0, timestamp=0, latD, lngD, timestampD;
+        long lat = 0, lng = 0, timestamp = 0, latD, lngD, timestampD;
         List<PointTs> points = new ArrayList<PointTs>();
-        for (int i=0; i<trjCode.length();) {
+        for (int i = 0; i < trjCode.length(); ) {
             Tuple tuple = read(trjCode, i);
             latD = tuple.result;
             i = tuple.index;
@@ -44,19 +45,20 @@ public class TrjCompressor {
             lat += latD;
             lng += lngD;
             timestamp += timestampD;
-            PointTs point = new PointTs((double)lat / factor, (double) lng / factor, timestamp);
+            PointTs point = new PointTs((double) lat / factor, (double) lng / factor, timestamp);
             points.add(point);
         }
         return points;
     }
+
     private void write(List<Long> output, Object currValue, Object prevValue) {
         long currV, prevV;
         if (currValue instanceof Long) {
-            currV = (Long)currValue;
-            prevV = (Long)prevValue;
+            currV = (Long) currValue;
+            prevV = (Long) prevValue;
         } else if (currValue instanceof Double) {
-            currV = getRound((Double)currValue * factor);
-            prevV = getRound((Double)prevValue * factor);
+            currV = getRound((Double) currValue * factor);
+            prevV = getRound((Double) prevValue * factor);
         } else {
             throw new IllegalArgumentException("The type parameters must be long or double!");
         }
@@ -69,12 +71,12 @@ public class TrjCompressor {
             output.add((0x20 | (offset & 0x1f)) + 63);
             offset >>= 5;
         }
-        output.add((offset+63));
+        output.add((offset + 63));
     }
 
     private Tuple read(String s, int i) {
         long b = 0x20;
-        long result=0, shift=0, comp=0;
+        long result = 0, shift = 0, comp = 0;
         while (b >= 0x20) {
             b = s.charAt(i) - 63;
             i++;
@@ -93,19 +95,20 @@ public class TrjCompressor {
 
         StringBuilder result = new StringBuilder();
         for (long i : nums) {
-            result.append((char)i);
+            result.append((char) i);
         }
         return result.toString();
     }
 
     private long getRound(double x) {
-        return (long)Math.copySign(Math.round(Math.abs(x)), x);
+        return (long) Math.copySign(Math.round(Math.abs(x)), x);
     }
 }
 
 class Tuple {
     long result;
     int index;
+
     Tuple(int index, long result) {
         this.index = index;
         this.result = result;
