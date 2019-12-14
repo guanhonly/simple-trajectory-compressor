@@ -64,8 +64,8 @@ public class TrjCompressorTest {
         String path = "data/Trajectory";
         File directory = new File(path);
         File[] fs = directory.listFiles();
-        int trjCount = 0;
         double avgCompressionRate = 0;
+        List<Double> allCompressionRates = new ArrayList<Double>();
         for (File f : fs) {
             if (!f.isDirectory()) {
                 InputStream is = null;
@@ -103,8 +103,8 @@ public class TrjCompressorTest {
                     if (jsonString.length() != 0) {
                         ratioOfTwo = (double) encoding.length() / (double) jsonString.length();
                     }
-                    trjCount++;
                     avgCompressionRate += ratioOfTwo;
+                    allCompressionRates.add(ratioOfTwo);
                     System.out.println("json size: " + jsonString.length());
                     System.out.println("polyline encoding size: " + encoding.length());
                     System.out.println("compression rate: " + ratioOfTwo * 100 + " %");
@@ -127,9 +127,19 @@ public class TrjCompressorTest {
                 }
             }
         }
-        if (trjCount > 0) {
-            avgCompressionRate = avgCompressionRate / trjCount;
+        int size = allCompressionRates.size();
+        Collections.sort(allCompressionRates);
+        double median = 0;
+        if (size > 0) {
+            avgCompressionRate = avgCompressionRate / size;
+            if ((size & 1) == 0) {
+                median = (allCompressionRates.get(size/2) + allCompressionRates.get(size/2-1))/2;
+            } else {
+                median = allCompressionRates.get(size/2);
+            }
         }
-        System.out.println("average compression rate(compared to json): " + avgCompressionRate*100 + " %");
+
+        System.out.println("mean of compression rate: " + avgCompressionRate*100 + " %");
+        System.out.println("median of compression rate: " + median*100 + " %");
     }
 }
