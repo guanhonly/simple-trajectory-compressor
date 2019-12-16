@@ -1,4 +1,4 @@
-# SimpleTrajectoryCompressor
+# simple-trajectory-compressor
 A simple implementation of polyline encoding algorithm in Java.  
 
 ## Principles
